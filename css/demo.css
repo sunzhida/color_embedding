@@ -1,0 +1,385 @@
+/* General Demo Style */
+@import url(http://fonts.googleapis.com/css?family=Lato:300,400,700);
+
+html { height: 100%; }
+
+*,
+*:after,
+*:before {
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	padding: 0;
+	margin: 0;
+}
+
+/* Clearfix hack by Nicolas Gallagher: http://nicolasgallagher.com/micro-clearfix-hack/ */
+.clearfix:before,
+.clearfix:after {
+    content: " "; /* 1 */
+    display: table; /* 2 */
+}
+
+.clearfix:after {
+    clear: both;
+}
+
+.clearfix {
+    *zoom: 1;
+}
+
+body {
+    font-family: 'Lato', Calibri, Arial, sans-serif;
+    background: #ddd url(../images/bg.jpg) repeat top left;
+    font-weight: 300;
+    font-size: 12px;
+    color: #333;
+    -webkit-font-smoothing: antialiased;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    text-shadow: 0 1px 0 rgba(255,255,255,0.8);
+}
+
+a {
+	color: #555;
+	text-decoration: none;
+}
+
+.container {
+	width: 100%;
+	position: relative;
+}
+
+.clr {
+	clear: both;
+	float: none;
+}
+
+.main {
+	width: 100%;
+	max-width: 960px;
+	padding: 0 0px;
+	margin: 0 auto;
+	bottom: 0px;
+	position: relative;
+}
+
+.main > header {
+	padding: 40px 0;
+}
+
+.main > header h1 {
+	font-size: 34px;
+	line-height: 38px;
+	margin: 0;
+	font-weight: 700;
+	color: #333;
+	float: left;
+}
+
+.main > header h1 span {
+	display: block;
+	font-size: 20px;
+	font-weight: 300;
+}
+
+.main p {
+	padding: 30px 0 0;
+	text-align: center;
+	font-weight: 400;
+	line-height: 22px;
+}
+
+/* Header Style */
+.codrops-top {
+	line-height: 24px;
+	font-size: 11px;
+	background: #fff;
+	background: rgba(255, 255, 255, 0.5);
+	text-transform: uppercase;
+	z-index: 9999;
+	position: relative;
+	font-family: Cambria, Georgia, serif;
+	box-shadow: 1px 0px 2px rgba(0,0,0,0.2);
+}
+
+.codrops-top a {
+	padding: 0px 10px;
+	letter-spacing: 1px;
+	color: #333;
+	text-shadow: 0 -1px 0 #fff;
+	display: inline-block;
+}
+
+.codrops-top a:hover {
+	background: rgba(255,255,255,0.8);
+	color: #000;
+}
+
+.codrops-top span.right {
+	float: right;
+}
+
+.codrops-top span.right a {
+	float: left;
+	display: block;
+}
+
+/* Demo Buttons Style */
+.codrops-demos {
+	float: right;
+	clear: none;
+	padding-top: 10px;
+}
+
+.codrops-demos a {
+    display: inline-block;
+    margin: 10px 10px 10px 0;
+    color: #666;
+    font-weight: 700;
+    line-height: 30px;
+    border-bottom: 4px solid transparent;
+}
+
+.codrops-demos a:hover {
+	color: #000;
+	border-color: #000;
+}
+
+.codrops-demos a.current-demo,
+.codrops-demos a.current-demo:hover {
+	color: #aaa;
+	border-color: #aaa;
+}
+
+.column {
+	width: 50%;
+	float: left;
+	padding: 20px;
+	min-height: 300px;
+}
+
+.column p {
+	text-align: left;
+}
+
+.column-20 {
+	width: 20%;
+}
+
+.column-80 {
+	width: 80%;
+}
+
+.js .fixed-bar {
+	position: fixed;
+	width: 100%;
+	left: 0;
+	bottom: 0;
+}
+
+.js .gallery {
+	width: 100vw;
+	height: 100%;
+	max-width: 100%;
+	margin: 0 auto;
+	border-radius: 5px;
+	position: relative;
+	background: #000 url(../images/black_denim.png);
+	box-shadow: 0 2px 1px rgba(255,255,255,0.9), 0 -2px 1px rgba(255,255,255,0.9);
+}
+
+
+.bn_area {
+	max-width: 100%;
+	
+	bottom: 5px;
+	right:5px;
+	left: 5px;
+}
+.bn_area li{
+	padding: 2px
+}
+
+
+.lt-ie8 .elastislide-list {
+	display: none;
+}
+
+
+.overlay {
+    height: 0%;
+    width: 50%;
+    position: fixed;
+    z-index: 50;
+    top: 0;
+    
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0, 0.8);
+    overflow-y: hidden;
+    transition: 0.5s;
+    
+    
+    
+}
+
+.overlay_l {
+    left: 0px;
+}
+
+.overlay_r {
+    right: 0px;
+    background-color: rgba(51, 51, 51, 0.91);
+    color: #fcf8e3;
+}
+
+.overlay-content {
+    position: relative;
+    top: 10%;
+    width: 100%;
+    text-align: center;
+    margin-top: 30px;
+}
+.overlay_r a {
+    color:#818181 ;
+}
+.overlay_l a {
+    color: #818181;
+}
+.overlay a {
+    padding: 8px;
+    text-decoration: none;
+    font-size: 20px;
+    display: block;
+    transition: 0.3s;
+}
+
+.overlay a:hover, .overlay a:focus {
+    color: #f1f1f1;
+    background-color: rgba(51, 51, 51, 0.91);
+}
+
+.overlay .closebtn {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    font-size: 30px;
+}
+
+.upper_area{
+	height: 60vh;
+}
+.lower_area{
+	height: 40%
+}
+
+.overlay .input-group
+{
+
+	width: 60%;
+	margin-left: 20%
+
+}
+
+
+.lower_area .input-group
+{
+
+	display: none;
+
+}
+
+.input-group .btn-secondary
+{
+	background-color: #ccc;
+}
+
+.icon_pa {
+    width: 26px; height: 5px;
+    background: url('../images/css_sprites.png') -10px -10px;
+}
+
+
+.scrollmenu {
+    background-color: rgba(255,255,255,.15);
+    overflow: auto;
+    white-space: nowrap;
+    border-color:rgba(255,255,255,.1);
+    margin-top: 2px;
+    margin-left: 3px;
+    display: none;
+
+}
+
+
+.scrollmenu a {
+    display: inline-block;
+    color: white;
+    text-align: center;
+    padding: 14px;
+    text-decoration: none;
+    color:  #fbefb0;
+    background-color: rgba(51,51,51,.91);
+    border-color:rgba(255,255,255,.1);
+    font-size: 12px;
+    font-weight: 100;
+
+
+
+}
+
+.scrollmenu a:hover {
+    
+    color: #fbefb0;
+
+    background-color: #ada78b;
+    border-color: #ada78b
+
+}
+
+.scrollmenu a:focus {
+    background-color: #ada78b;
+    color: #fbefb0;
+
+}
+
+
+
+.inl-bl {
+    display: inline-block;
+    width: 100%;
+}
+.inl-bl .colorpicker-saturation{
+    display: none;
+    
+}
+
+.colorpicker-element .colorpicker-horizontal
+{
+	width: 90%;
+	margin-left: 5%;
+}
+.colorpicker.colorpicker-horizontal .colorpicker-hue
+{
+	width: 100%
+}
+.colorpicker-element .colorpicker-color{
+	display: none;
+} 
+
+@media screen and (max-height: 450px) {
+  .overlay {overflow-y: auto;}
+  .overlay a {font-size: 12px}
+  .overlay .closebtn {
+    font-size: 20px;
+    top: 10px;
+    right: 20px;
+  }
+}
+
+	.codrops-demos {
+		float: left;
+		clear: both;
+	}
+}
+

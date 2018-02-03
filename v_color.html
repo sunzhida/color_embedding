@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+	<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7"><![endif]-->
+	<!--[if IE 7]><html class="no-js lt-ie9 lt-ie8"><![endif]-->
+	<!--[if IE 8]><html class="no-js lt-ie9"><![endif]-->
+	<!--[if gt IE 8]><!--><html class="no-js"><!--<![endif]-->
+    <head>
+        <title>Semantic Guided Photo Filtering</title>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"> 
+        <meta name="description" content="Elastislide - A Responsive Image Carousel" />
+        <meta name="keywords" content="carousel, jquery, responsive, fluid, elastic, resize, thumbnail, slider" />
+		<meta name="author" content="Codrops" />
+		<!-- <link rel="shortcut icon" href="../favicon.ico">  -->
+        
+		<link rel="stylesheet" type="text/css" href="css/elastislide.css" />
+		
+		<link rel="stylesheet" href="css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="css/custom.css" />
+		<link href="dist/css/bootstrap-colorpicker.min.css" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="css/demo.css" />
+		<script src="js/modernizr.custom.17475.js"></script>
+		
+		<script type="text/javascript" src="js/jquery.min.js"></script>
+		<script type="text/javascript" src="js/jquerypp.custom.js"></script>
+		<script type="text/javascript" src="js/jquery.elastislide.js"></script>
+		<script src="js/bootstrap.min.js"></script>
+		<script src="dist/js/bootstrap-colorpicker.js"></script>
+		
+		<script src="js/color.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.4/lodash.min.js"></script>
+
+
+		
+    </head>
+    <body>
+		<div class="container demo-4">
+			<!-- Codrops top bar -->
+            <div class="codrops-top clearfix">
+               
+            </div><!--/ Codrops top bar -->
+
+            <div class="main">
+			
+            	
+				<div class="gallery">
+					<div id ="upper_id" class="upper_area">
+						<div id = "par_preview" class="image-preview">
+							<img id="preview" src="images/large/4.jpg" />
+						</div>
+						
+					   </div>
+					   
+					 
+					
+					<div class="lower_area">
+					<!-- Elastislide Carousel -->
+					<ul id="carousel" class="elastislide-list">
+						
+					</ul>
+					<!-- Overlay for navigation-->
+
+					<div id="more_div" class="input-group"><input type="text" class="form-control" placeholder="More..."> <span class="input-group-btn"> <button class="btn btn-secondary" type="button">Go!</button></span>
+					</div>
+
+					<div id="scroll_label" class="scrollmenu">
+				  		<a href="#">Emotion</a>
+						    <a href="#">Nature</a>
+						    <a href="#">Human</a>
+						    <a href="#">Time</a>
+						    <a href="#">Art</a>
+						    <a href="#">Location</a>
+						    <a href="#">Discriptive</a>
+					</div>
+
+					<div id="cp7" class="inl-bl"></div>
+							<style>
+							    .inl-bl {
+							        display: inline-block;
+							        width: 100%;
+							    }
+							    .inl-bl .colorpicker-saturation{
+							        display: none;
+							        width: 90%;
+							    }
+							    
+							    .colorpicker.colorpicker-horizontal
+							    {
+							    	width: 90%;
+							    	margin-left: 5%;
+							    }
+							    .colorpicker.colorpicker-horizontal .colorpicker-hue
+							    {
+							    	width: 100%
+							    }
+							    .colorpicker-element .colorpicker-color{
+							    	display: none;
+							    } 
+
+							    
+							</style>
+							<script>
+							    $(function() {
+							        $('#cp7').colorpicker({
+							            color: '#ffaa00',
+							            container: true,
+							            inline: true,
+							            horizontal: true,
+							            format: 'rgb',
+							            alpha: 0.5,
+							            slidersHorz: {
+									        
+									       saturation:{maxLeft:100,maxTop:100,callLeft:"setSaturation",callTop:"setBrightness"},hue:{maxLeft:290,maxTop:0,callLeft:"setHue",callTop:!1},alpha:{maxLeft:100,maxTop:0,callLeft:"setAlpha",callTop:!1}}
+									        
+									    
+							        }).on('changeColor',function(e){
+							        	var c = e.color;
+							        	updateLabel(c.toRGB());
+							        	c.setAlpha(0.5);
+							        	var color = c.toRGB();
+							        	$('#cp7')[0].style.backgroundColor = c.toString("rgb");
+							        	$('#cp7')[0].style.backgroundColor = "rgba(" + color.r+ ','+ color.g + ','+ color.b + ','+ color.a + ")";
+							        	
+							        });
+
+							    });
+							</script>
+										
+
+					
+
+					<div id="scroll_dim" class="scrollmenu">
+				  		<a class="btn"  onclick="openLabel('Default')">Default</a>
+					    <a class="btn" onclick="openLabel('Atomic')">Atomic</a>
+					    <a class="btn" onclick="openLabel('Creative')">Creative</a>
+					    <a class="btn" onclick="openLabel('Soft')">Soft</a>
+					    <a class="btn" onclick="openLabel('Subtle')">Subtle</a>
+					    <a class="btn" onclick="openLabel('Too old')">Too old</a>
+					    <a class="btn" onclick="openLabel('Unicolor')">Unicolor</a>
+					    <a class="btn" onclick="openLabel('Vintage')">Vintage</a>
+					    
+					</div>
+
+					<div class="bn_area">
+							
+							<li class="btn-group btn-group-justified">
+								
+								
+						        <a href="#" class=" btn btn-primary" onclick="uploadImg()">
+									<span class="glyphicon glyphicon-cloud-upload"></span>
+								</a>
+								<a href="#" class=" btn btn-primary" onclick="showMore()">
+									<span class="glyphicon glyphicon-search"></span>  
+								</a>
+								
+								
+
+							    <a href="#" class="btn btn-primary" onclick="changeVersion()">
+							    <span class="glyphicon glyphicon-save"></span> 
+							    </a>
+							</li>
+							
+							
+
+						</div>
+					
+							
+					</div>
+					<!-- End Elastislide Carousel -->
+					
+				
+				</div>
+
+				
+
+			</div>
+			
+
+			
+
+			
+				
+		</div>
+		<script type="text/javascript">
+			list_label_t = ["Aladin", "Amber","Anne","Antonio","Bob","Dean","Fred","Greg","Hagrid","Harry","Ivan","Jean","Josh","Julia","Karen","Lucas","Peter","Ramona","Salomon","Samantha","Atomic", "Conbalt", "Electromagnetic", "Gamma", "Infrared", "Monochrome", "Negative", "Nightvision", "Poltergeist","Artfunkle","Ashley","Fei","Gradelf","Grayson","Helena","Jinx","Kim","Max","Pax","Piper","Ray","Yin","Camille", "Hans", "Jessica", "Jones", "Laila", "Mary", "Per", "Robert", "Rose", "Sarah", "Thomas","Adrian", "Alex", "Ian", "Ingrad", "Janine", "Merissa", "Ronny", "Roxy", "Sanna","Agatha", "Agnes", "Gordon", "Harrision", "Henry", "Logan", "Shaan","Amy", "Chloe", "Danie", "Derek", "Elenore", "Ethan", "George", "Gram", "James", "Jayden","Jonathan","Joyce","Justin","Kirsten","Luke","Mio","Mirja","Penelope","Ryan","Tida","Borg", "Carl", "Doris", "Doug","Earl","Harper","Jyler","Kevin", "Lumina","Nash","Primos","Rusty","Satya","Stan","Sun"];
+				list_color_t = [[83, 67, 60],[128, 55, 127],[70, 52, 58],[160, 175, 196],[185, 192, 202],[60, 87, 52],[40, 50, 45],[43, 44, 21],[64, 65, 54],[189, 150, 117],[139, 48, 59],[128, 123, 111],[17, 14, 75],[53, 44, 30],[187, 97, 42],[111, 108, 97],[122, 140, 138],[57, 48, 61],[59, 75, 102],[69, 48, 48],[144, 3, 212],[30, 30, 85],[1, 55, 228],[22, 196, 40],[90, 43, 146],[198, 198, 198],[172, 172, 181],[77, 173, 75],[89, 88, 28],[74, 26, 104],[19, 42, 47],[81, 80, 77],[253, 253, 252],[45, 28, 0],[83, 82, 79],[90, 58, 48],[65, 50, 7],[82, 82, 80],[78, 78, 76],[4, 11, 13],[68, 67, 64],[29, 26, 20],[72, 83, 82],[86, 64, 91],[68, 69, 53],[58, 77, 56],[204, 142, 166],[204, 192, 141],[124, 87, 97],[74, 94, 97],[187, 141, 189],[154, 192, 158],[92, 91, 59],[76, 66, 58],[99, 87, 82],[41, 31, 33],[78, 78, 67],[99, 78, 83],[106, 56, 87],[45, 55, 76],[169, 153, 162],[65, 75, 73],[32, 32, 32],[55, 55, 55],[117, 98, 60],[110, 90, 79],[74, 53, 48],[48, 39, 24],[122, 103, 88],[158, 107, 68],[18, 9, 9],[118, 85, 163],[122, 142, 123],[143, 110, 105],[16, 12, 2],[97, 140, 97],[96, 99, 75],[79, 54, 31],[21, 36, 39],[160, 125, 107],[119, 76, 86],[142, 99, 83],[104, 83, 37],[96, 82, 72],[119, 17, 23],[194, 124, 122],[103, 41, 80],[48, 28, 100],[112, 22, 110],[74, 102, 72],[59, 47, 48],[35, 48, 66],[126, 83, 101],[85, 98, 115],[144, 84, 106],[89, 94, 70],[188, 119, 72],[80, 62, 63],[100, 119, 142],[17, 40, 28],[97, 88, 87],[162, 132, 121],[156, 107, 103],[95, 82, 69]];
+			
+			document.getElementById("cp7").style.display="none";
+
+			var  scroll_dim = document.getElementById("scroll_dim");
+			scroll_dim.style.display="block";
+			dimBtnCoding(0);
+			var scroll_label = document.getElementById("scroll_label");
+			var preview_list = document.getElementById("carousel");
+			var prefix = "thumb_ori_name";
+			var version = 0;
+			var currentImg = 10;
+			openLabel("Default");
+			//suggestionBtn();
+			var global_dimension ="Emotion";
+			var list_label;
+			var list_color;
+			var current = 0,
+				$preview = $( '#preview' ),
+				$carouselEl = $( '#carousel' ),
+				$upper_id = $('#upper_id'),
+				$carouselItems = $carouselEl.children(),
+				carousel = $carouselEl.elastislide( {
+					current : current,
+					minItems : 5,
+					onClick : function( el, pos, evt ) {
+
+						changeImage( el, pos );
+						evt.preventDefault();
+
+					},
+					onReady : function() {
+						document.getElementById('preview').src="images/10.jpg";
+						//changeImage( $carouselItems.eq( current ), current );
+						
+					}
+				} );
+			adjustImage();
+
+			$('.image-preview img').on('load', function () {
+				adjustImage();
+				});
+
+
+			function changeImage( el, pos ) {
+
+				$preview.attr( 'src', el.data( 'preview' ) );
+				$( '#carousel' ).children().removeClass( 'current-img' );
+				el.addClass( 'current-img' );
+				//carousel.setCurrent( pos );
+
+			}
+			function openNav() {
+			    document.getElementById("myNav").style.height = "100%";
+			    openLabel("Emotion");
+			}
+
+			function closeNav() {
+			    document.getElementById("myNav").style.height = "0%";
+			}
+			function openCategory(str, list_label)
+			{
+				var html_str="";
+				for (var i=0;i<list_label.length;i++){
+				var item_str ="<li  data-preview=\"images/" + currentImg+ "_cat/"+list_label[i]+".jpg\" style=\"width: 19.7368%; max-width: 150px; max-height: 160px;\" ><a href=\"#\"><img  src= \"images/" + currentImg+ "_cat/"+prefix +"/"+list_label[i]+".jpg\" alt=\"image" + (i+1) +"\" /></a></li>";
+				html_str = html_str + item_str;
+				}
+				preview_list.innerHTML = html_str;
+
+			}
+			function openLabel(str) {
+				
+				list_label = ["Aladin", "Amber","Anne","Antonio","Bob","Dean","Fred","Greg","Hagrid","Harry","Ivan","Jean","Josh","Julia","Karen","Lucas","Peter","Ramona","Salomon","Samantha"];//miss "Melissa",
+				list_color = ["(232,121,90)", "(136,141,124)","(237,237,216)","(120,14,30)","(44,209,59)","(97,97,97)","(206,63,77)","(231,32,80)"];
+				
+				if (version==2)
+				{
+					switch (str)
+					{	
+						// <a class="btn"  onclick="openLabel('Default')">Default</a>
+						//     <a class="btn" onclick="openLabel('Atomoic')">Atomoic</a>
+						//     <a class="btn" onclick="openLabel('Creative')">Creative</a>
+						//     <a class="btn" onclick="openLabel('Soft')">Soft</a>
+						//     <a class="btn" onclick="openLabel('Subtle')">Subtle</a>
+						//     <a class="btn" onclick="openLabel('Too old')">Too old</a>d
+						//     <a class="btn" onclick="openLabel('Unicolor')">Unicolor</a>
+						//     <a class="btn" onclick="openLabel('Vintage')">Vintage</a>
+						case "Emotion" :
+							dimBtnCoding(1);
+							list_label = ["Infrared", "Grayson", "Jinx", "Amber", "Anne", "Antonio",  "Hagrid",  "Lucas", "Ian", "Ingrad", "Ronny",  "Harrision", "Chloe", "Gram", "Kirsten", "Earl"];// miss "Melissa",
+							
+							break;
+						case "Human":
+							dimBtnCoding(2);
+							list_label = ["Max", "Yin", "Samantha", "Laila", "Per", "Roxy", "Logan", "Mio", "Mirja", "Doris","Doug","Harper","Nash", "Primos"];
+							list_color =[[168,156,144],[59,74,99],[28,22,24],[173,173,173],[228, 171, 33],[245, 241, 232],[224, 22, 22],[187,202,205],[229,186,11]];
+							break;
+						case "Nature" :
+							dimBtnCoding(3);
+							list_label = ["Monochrome", "Vermillion", "Pax", "Piper", "Dean", "Fred", "Mary", "Robert", "Rose", "Thomas", "Henry", "Derek",  "Jonathan", "Luke", "Rusty", "Satya"];
+							list_color = [[204,86,111] ,[245,214,12],[217,212,174 ],[71,135,221],[223,216,191 ],[228, 153, 24],[240,240,240],[35,51,38],[227,216,170],[209,25,25],[224,221,142],[177,204,45]];
+							break;
+						case "Time" :
+							dimBtnCoding(4);
+							list_label = ["Ashley", "Fei", "Gradelf", "Bob", "Greg", "Harry", "Sara", "Sophia", "Jessica", "Alex", "Sanna", "Agatha", "Amy","Tida", "Borg", "Carl","Kevin"];
+							list_color = [[240,240,240],[240,240,240],[238,222,196],[168,96,96],[255,153,0],[59,74,99],[240,236,225],[239, 107, 91],[245,211,220],[48,25,8],[79,158,141]];
+							break;
+						case "Art":
+							dimBtnCoding(5);
+							list_label = ["Conbalt", "Negative", "Poltergeist", "Ultraviolet", "Helena", "Kim", "Ray", "Josh", "Salomon", "Camille", "Shaan", "Danie", "Ryan"];
+							list_color = [[232,90,90],[232,90,90],[237,237,216],[92,14,7],[232,90,90],[228,222,222],[184,40,69],[228,222,222],[153,17,28],[239, 202, 91]];
+							break;
+						case "Location":
+							dimBtnCoding(6);
+							list_label = ["Julia", "Ramona", "Hans", "Sarah", "George", "Stan"];
+							list_color =[[173,208,239],[204,202,188],[196,30,153],[228,222,222],[56,56,56],[57,47,35],[235,212,160],[18,97,174],[230,226,218],[49, 143, 110]];
+							break;
+						case "Descriptive":
+							dimBtnCoding(7);
+							list_label = ["Gamma", "Infrared", "Artfunkle", "Aladin", "Jean", "Karen", "Mellisa", "Peter", "Tom", "Tony", "Agnes", "Gordon", "Elenore", "Ethan", "James", "Jayden", "Penelope", "Jyler", "Sun"];
+							list_color =[[23,37,43],[245, 231, 27],[240,240,240],[207,203,191],[245,236,171],[235,94,0],[195,181,155],[26,18,24],[211,62,74],[197,47,77]];
+							break;
+						case "Substance":
+							dimBtnCoding(8);
+							list_label = ["Atomic", "Electromagnetic", "Nightvision", "Specter", "Ivan", "Jones",  "Adrian", "Janine", "Merissa", "Joyce", "Justin", "Lumina"];
+							list_color =[[240,120,144],[255, 228, 7],[187,202,205],[130,91,100],[234,217,148],[153,66,66],[204,167,137],[16,128,132],[82, 199, 26],[179,152,130]];
+							break;
+						
+						
+						default :
+							break;
+					}
+				}
+				else
+					switch (str)
+					{	
+						// <a class="btn"  onclick="openLabel('Default')">Default</a>
+						//     <a class="btn" onclick="openLabel('Atomoic')">Atomoic</a>
+						//     <a class="btn" onclick="openLabel('Creative')">Creative</a>
+						//     <a class="btn" onclick="openLabel('Soft')">Soft</a>
+						//     <a class="btn" onclick="openLabel('Subtle')">Subtle</a>
+						//     <a class="btn" onclick="openLabel('Too old')">Too old</a>
+						//     <a class="btn" onclick="openLabel('Unicolor')">Unicolor</a>
+						//     <a class="btn" onclick="openLabel('Vintage')">Vintage</a>
+						case "Default" :
+							dimBtnCoding(1);
+							list_label = ["Aladin", "Amber","Anne","Antonio","Bob","Dean","Fred","Greg","Hagrid","Harry","Ivan","Jean","Josh","Julia","Karen","Lucas","Peter","Ramona","Salomon","Samantha"];// miss "Melissa",
+							
+							break;
+						case "Atomic":
+							dimBtnCoding(2);
+							list_label = ["Atomic", "Conbalt", "Electromagnetic", "Gamma", "Infrared", "Monochrome", "Negative", "Nightvision", "Poltergeist"];
+							list_color =[[168,156,144],[59,74,99],[28,22,24],[173,173,173],[228, 171, 33],[245, 241, 232],[224, 22, 22],[187,202,205],[229,186,11]];
+							break;
+						case "Creative" :
+							dimBtnCoding(3);
+							list_label = ["Artfunkle","Ashley","Fei","Gradelf","Grayson","Helena","Jinx","Kim","Max","Pax","Piper","Ray","Yin"];
+							list_color = [[204,86,111] ,[245,214,12],[217,212,174 ],[71,135,221],[223,216,191 ],[228, 153, 24],[240,240,240],[35,51,38],[227,216,170],[209,25,25],[224,221,142],[177,204,45]];
+							break;
+						case "Soft" :
+							dimBtnCoding(4);
+							list_label = ["Camille", "Hans", "Jessica", "Jones", "Laila", "Mary", "Per", "Robert", "Rose", "Sarah", "Thomas"];
+							list_color = [[240,240,240],[240,240,240],[238,222,196],[168,96,96],[255,153,0],[59,74,99],[240,236,225],[239, 107, 91],[245,211,220],[48,25,8],[79,158,141]];
+							break;
+						case "Subtle":
+							dimBtnCoding(5);
+							list_label = ["Adrian", "Alex", "Ian", "Ingrad", "Janine", "Merissa", "Ronny", "Roxy", "Sanna"];
+							list_color = [[232,90,90],[232,90,90],[237,237,216],[92,14,7],[232,90,90],[228,222,222],[184,40,69],[228,222,222],[153,17,28],[239, 202, 91]];
+							break;
+						case "Too old":
+							dimBtnCoding(6);
+							list_label = ["Agatha", "Agnes", "Gordon", "Harrision", "Henry", "Logan", "Shaan"];
+							list_color =[[173,208,239],[204,202,188],[196,30,153],[228,222,222],[56,56,56],[57,47,35],[235,212,160],[18,97,174],[230,226,218],[49, 143, 110]];
+							break;
+						case "Unicolor":
+							dimBtnCoding(7);
+							list_label = ["Amy", "Chloe", "Danie", "Derek", "Elenore", "Ethan", "George", "Gram", "James", "Jayden","Jonathan","Joyce","Justin","Kirsten","Luke","Mio","Mirja","Penelope","Ryan","Tida"];
+							list_color =[[23,37,43],[245, 231, 27],[240,240,240],[207,203,191],[245,236,171],[235,94,0],[195,181,155],[26,18,24],[211,62,74],[197,47,77]];
+							break;
+						case "Vintage":
+							dimBtnCoding(8);
+							list_label = ["Borg", "Carl", "Doris", "Doug","Earl","Harper","Jyler","Kevin", "Lumina","Nash","Primos","Rusty","Satya","Stan","Sun"];
+							list_color =[[240,120,144],[255, 228, 7],[187,202,205],[130,91,100],[234,217,148],[153,66,66],[204,167,137],[16,128,132],[82, 199, 26],[179,152,130]];
+							break;
+						
+						
+						default :
+							break;
+					}
+				
+				
+				openCategory(str,list_label);
+
+				
+				// scroll_label.style.display="block";
+				// document.getElementById("more_div").style.display="none";
+				// document.getElementById("cp7").style.display="block";
+
+				// //left_content.innerHTML ="";
+				// var html_str="";
+				// for (var i = 0; i<list_label.length; i++)
+				// {
+
+				// 	var item_str = "<a class=\"btn\" onclick=\"labelClick(  "  + i +"  ) \" >" + list_label[i] + "  "
+				// 			+ "<button class=\"btn btn-default\" style=\"background-color:" +"rgb("+ list_color[i][0] + ',' + list_color[i][1] + ',' + list_color[i][2] + ')'   +"\" ></button></a>";
+
+				// 	html_str = html_str + item_str;
+				// }
+				// html_str = html_str + "<a class=\"btn\" onclick=\"showMore()\" style=\"background-color: #555; \">" +  " More " + "</a>";
+				// //html_str = html_str + "<a><div class=\"input-group\"><input type=\"text\" class=\"form-control\" placeholder=\"More...\"> <span class=\"input-group-btn\"> <button class=\"btn btn-secondary\" type=\"button\">Go!</button></span></div></a>";
+				// scroll_label.innerHTML=html_str;
+				// scroll_label.scrollLeft = 0;
+
+			    //document.getElementById("myLabel").style.height = "100%";
+			    //global_dimension = str;
+			}
+
+			function openLabelBtn()
+			{
+				openLabel(global_dimension);
+			}
+
+			function closeLabel() {
+			    document.getElementById("myLabel").style.height = "0%";
+			    closeNav();
+			}
+
+			function adjustImage()
+			{
+				var img_width = $preview[0].width;
+				var img_height = $preview[0].height;
+				var par_width = $upper_id[0].offsetWidth;
+				var par_height = $upper_id[0].offsetHeight;
+				if (img_height<=img_width)
+				{
+
+					$('.image-preview img').css('padding-top',(par_height - img_height)/2.0 + 'px');
+					$('.image-preview img').css('padding-left', '0px');
+				}
+				else
+				{
+					if(img_height>par_height)
+					{
+						$('.image-preview img').css('max-height', par_height + 'px');
+					}
+					else{
+						$('.image-preview img').css('max-height', '100%');
+					}
+					$('.image-preview img').css('padding-left',(par_width - img_width)/2.0 + 'px');
+					$('.image-preview img').css('padding-top', '0px');
+				}
+			}
+			function uploadImg()
+			{
+				currentImg +=1;
+				if (currentImg>12) {currentImg = 10};
+				document.getElementById('preview').src="images/" + currentImg + ".jpg";
+				version = 1;
+				openLabel("Default");
+				// var html_str = "";
+
+				// for (var i=0;i<5;i++){
+				// 	var item_str ="<li  data-preview=\"images/result"+currentImg +"/" + "happy" + "result"+(i+1)+".jpg\" style=\"width: 19.7368%; max-width: 150px; max-height: 160px;\" ><a href=\"#\"><img  src=\"images/result"+currentImg +"/" + "happy" + "thumb" + (i+1) + ".jpg\" alt=\"image" + (i+1) +"\" /></a></li>";
+				// 	html_str = html_str + item_str;
+				// }
+				// preview_list.innerHTML = html_str;
+
+				// scroll_label.style.display="none";
+				// document.getElementById("cp7").style.display="none";
+				// document.getElementById("more_div").style.display="none";
+
+				// suggestionBtn();
+				// dimBtnCoding(0);//set all dim buttion inactive;
+			}
+
+			function labelClick(index)
+			{
+				
+				var html_str = "";
+
+				for (var i=0;i<5;i++){
+					var item_str ="<li  data-preview=\"images/result"+ currentImg +"/" + list_label[index] + "result"+(i+1)+".jpg\" style=\"width: 19.7368%; max-width: 150px; max-height: 160px;\" ><a href=\"#\"><img  src=\"images/result"+currentImg +"/" + list_label[index] + "thumb" + (i+1) + ".jpg\" alt=\"image" + (i+1) +"\" /></a></li>";
+					html_str = html_str + item_str;
+				}
+				preview_list.innerHTML = html_str;
+				
+				labelBtnCoding(index);
+
+			}
+
+			function showMore()
+			{
+				scroll_label.style.display="none";
+				document.getElementById("more_div").style.display="table";
+				document.getElementById("cp7").style.display="none";
+				dimBtnCoding(0);//set all dim buttion inactive;
+				
+
+			}
+			function updateLabel(rgb)
+			{
+				var rgb_value = [rgb.r, rgb.g,rgb.b];
+				var lab_value = rgb2lab(rgb_value);
+				var temp_color = list_color_t.slice();
+				var temp_label = list_label_t.slice();
+				var dist=[];
+				for ( var i = 0; i<list_color_t.length;i++)
+				{
+					lab_list = rgb2lab(list_color_t[i]);
+					var dist_v = square(lab_value[0] - lab_list[0])+ square(lab_value[1] - lab_list[1]) +square(lab_value[2] - lab_list[2]);
+ 					dist.push(dist_v);
+ 
+				}
+				dist = sortWithIndeces(dist);
+				for (var i = 0; i<temp_label.length;i++) {
+					  list_color_t[i] = temp_color[dist.sortIndices[i]];
+					  list_label_t[i] = temp_label[dist.sortIndices[i]];
+					  //alert(list_label[i] + "  " + temp_label[dist.sortIndices[i]] );
+					}; 
+				scroll_label.style.display="none";
+				document.getElementById("more_div").style.display="none";
+
+				//left_content.innerHTML ="";
+				
+					//html_str = html_str + item_str;
+				var html_str="";
+				for (var i=0;i<list_label.length;i++){
+					var item_str ="<li  data-preview=\"images/" + currentImg+ "_cat/"+list_label_t[i]+".jpg\" style=\"width: 19.7368%; max-width: 150px; max-height: 160px;\" ><a href=\"#\"><img  src= \"images/" + currentImg+ "_cat/" +prefix + "/"+list_label_t[i]+".jpg\" alt=\"image" + (i+1) +"\" /></a></li>";
+				html_str = html_str + item_str;
+				}
+				preview_list.innerHTML = html_str;
+				preview_list.scrollLeft=0;
+				
+				//html_str = html_str + "<a class=\"btn\" onclick=\"showMore()\" style=\"background-color: #555; \">" +  " More " + "</a>";
+				
+				
+			}
+
+
+			function square(n) {
+			  return n * n;
+			}
+
+
+			function sortWithIndeces(toSort) {
+			  for (var i = 0; i < toSort.length; i++) {
+			    toSort[i] = [toSort[i], i];
+			  }
+			  toSort.sort(function(left, right) {
+			    return left[0] < right[0] ? -1 : 1;
+			  });
+			  toSort.sortIndices = [];
+			  for (var j = 0; j < toSort.length; j++) {
+			    toSort.sortIndices.push(toSort[j][1]);
+			    toSort[j] = toSort[j][0];
+			  }
+			  return toSort;
+			}
+
+			function dimBtnCoding( index)
+			{
+				
+				// for (var i =0;i<scroll_dim.children.length;i++)
+				// {
+				// 	scroll_dim.childNodes[i*2 +1].style.backgroundColor="#333333";
+					
+				// }
+				
+				// //scroll_dim.childNodes[1].style.backgroundColor="rgba(88, 88, 88, 0.91)";
+				// //scroll_dim.childNodes[5].style.backgroundColor="rgba(88, 88, 88, 0.91)";
+				// //suggestionBtn();
+				// if (index!=0)
+				// {
+				// 	scroll_dim.childNodes[index*2-1].style.backgroundColor="#ada78b";
+				// }
+			}
+			function labelBtnCoding(index)
+			{
+				for (var i =0;i<scroll_label.children.length;i++)
+				{
+					scroll_label.childNodes[i].style.backgroundColor="#333333";
+				}
+				scroll_label.childNodes[index].style.backgroundColor="#ada78b";
+				
+			}
+
+			function suggestionBtn()
+			{
+				for (var i =0;i<scroll_dim.children.length;i++)
+				{
+					scroll_dim.childNodes[i*2 +1].style.fontSize="12px";
+					scroll_dim.childNodes[i*2 +1].style.fontWeight="100";
+				}
+				switch(currentImg){
+					case 1: case 4: case 7:
+						scroll_dim.childNodes[1].style.fontSize="14px";
+						scroll_dim.childNodes[5].style.fontSize="14px";
+						scroll_dim.childNodes[1].style.fontWeight="bold";
+						scroll_dim.childNodes[5].style.fontWeight="bold";
+						scroll_dim.childNodes[13].style.fontSize="14px";
+						scroll_dim.childNodes[13].style.fontWeight="bold";
+						break;
+					case 2: case 5: case 8:
+						scroll_dim.childNodes[3].style.fontSize="14px";
+						scroll_dim.childNodes[3].style.fontWeight="bold";
+						scroll_dim.childNodes[7].style.fontWeight="bold";
+						scroll_dim.childNodes[7].style.fontSize="14px";
+						scroll_dim.childNodes[11].style.fontSize="14px";
+						scroll_dim.childNodes[11].style.fontWeight="bold";
+						break;
+					case 3: case 6: case 9:
+						scroll_dim.childNodes[1].style.fontSize="14px";
+						scroll_dim.childNodes[1].style.fontWeight="bold";
+						scroll_dim.childNodes[9].style.fontWeight="bold";
+						scroll_dim.childNodes[9].style.fontSize="14px";
+						scroll_dim.childNodes[13].style.fontSize="14px";
+						scroll_dim.childNodes[13].style.fontWeight="bold";
+						break;
+
+
+				}
+				
+			}
+
+			
+			function changeVersion()
+			{
+				var html_str = "<a class=\"btn\"  onclick=\"openLabel('Default')\">Default</a>"+
+					    "<a class=\"btn\" onclick=\"openLabel('Atomic')\">Atomic</a>" +
+					    "<a class=\"btn\" onclick=\"openLabel('Creative')\">Creative</a>"+
+					    "<a class=\"btn\" onclick=\"openLabel('Soft')\">Soft</a>"+
+					    "<a class=\"btn\" onclick=\"openLabel('Subtle')\">Subtle</a>" +
+					    "<a class=\"btn\" onclick=\"openLabel('Too old')\">Too old</a>" +
+					    "<a class=\"btn\" onclick=\"openLabel('Unicolor')\">Unicolor</a>" +
+					    "<a class=\"btn\" onclick=\"openLabel('Vintage')\">Vintage</a>";
+				if(version==3)
+				{
+					prefix = "thumb_ori_name";
+					version = 0;
+					scroll_dim.innerHTML = html_str;
+					openLabel('Default');
+					document.getElementById("cp7").style.display="none";
+
+				}
+				else if (version == 0)
+				{
+					prefix = "thumb_new_name";
+					version = 1
+					scroll_dim.innerHTML = html_str;
+					openLabel('Default');
+					document.getElementById("cp7").style.display="none";
+
+				}
+				else if (version == 1)
+				{
+					prefix = "thumb_ori_name";
+					version = 2;
+					html_str = "<a class=\"btn\"  onclick=\"openLabel('Emotion')\">Emotion</a>" +
+						"<a class=\"btn\" onclick=\"openLabel('Human')\">Human</a>" +
+					    "<a class=\"btn\" onclick=\"openLabel('Nature')\">Nature</a>" +
+					    "<a class=\"btn\" onclick=\"openLabel('Time')\">Time</a>"+
+					    "<a class=\"btn\" onclick=\"openLabel('Art')\">Art</a>" +
+					    "<a class=\"btn\" onclick=\"openLabel('Location')\">Location</a>" +
+					    "<a class=\"btn\" onclick=\"openLabel('Descriptive')\">Descriptive</a>" +
+					    "<a class=\"btn\" onclick=\"openLabel('Substance')\">Substance</a>";
+					scroll_dim.innerHTML = html_str;
+					openLabel('Emotion');
+					document.getElementById("cp7").style.display="none";
+
+				}
+				else if (version == 2)
+				{
+					prefix = "thumb_color";
+					version =3;
+					scroll_dim.innerHTML = html_str;
+					openLabel('Default');
+					document.getElementById("cp7").style.display="block";
+
+				}
+			}
+
+			
+		</script>
+    </body>
+</html>
